@@ -17,4 +17,9 @@ public class EntryService {
 		entryRepository.save(Entry.fromCreateEntryTO(createEntryTO));
 	}
 	
+	public Entry getEntry(String entry) {
+		Entry entryClaimed = entryRepository.findFirstByEntryAndSituationOrderByIdDesc(entry, 1).orElse(null);
+		return entryClaimed;
+	}
+	
 }
