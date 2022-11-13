@@ -102,3 +102,6 @@ local.properties
 .classpath
 
 # End of https://www.gitignore.io/api/eclipse
+.DS_Store
+src/.DS_Store
+src/main/.DS_Store
