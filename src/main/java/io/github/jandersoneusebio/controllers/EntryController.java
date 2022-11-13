@@ -3,6 +3,7 @@ package io.github.jandersoneusebio.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,17 @@ public class EntryController {
 	@GetMapping("get-entry")
 	public ResponseEntity<Entry> getEntry(@RequestParam("entry") String entry){
 		return new ResponseEntity<Entry>(entryService.getEntry(entry), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("delete-entry")
+	public ResponseEntity<String> deleteEntry(@RequestParam("entry") String entry){
+		try {
+			entryService.deleteEntry(entry);
+			return new ResponseEntity<String>("Entry deleted successfully", HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		
 	}
 	
 }
