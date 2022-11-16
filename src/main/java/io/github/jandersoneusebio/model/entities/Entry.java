@@ -2,6 +2,8 @@ package io.github.jandersoneusebio.model.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,6 +48,12 @@ public class Entry implements Serializable {
 	@Column(name = "situation")
 	private Integer situation;
 	
+	@Column(name = "create_date")
+	private Timestamp createDate;
+	
+	@Column(name = "update_date")
+	private Timestamp updateDate;
+	
 	public static Entry fromCreateEntryTO(CreateEntryTO createEntryTO) {
 		Entry newEntry = new Entry();
 		newEntry.setEntry(createEntryTO.getEntry());
@@ -54,6 +62,7 @@ public class Entry implements Serializable {
 		newEntry.setAccountNumber(createEntryTO.getAccountNumber());
 		newEntry.setAccountDocument(createEntryTO.getAccountDocument());
 		newEntry.setSituation(1);
+		newEntry.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
 		return newEntry;
 	}
 
